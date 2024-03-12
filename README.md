@@ -1,5 +1,13 @@
 # Mining-quality-prediction
 
+## About
+The target is to predict the % of Silica in the end of the process, which is the concentrate of iron ore and its impurity (which is the % of Silica).
+
+Data Reference: [Kaggle](https://www.kaggle.com/edumagalhaes/quality-prediction-in-a-mining-process)
+
+## Tech Stack
+![Tech Stack](images/tech_stack.png)
+
 ### DATA ENGINEERING
 - Data Profiling: Great Expectations
 - Data Versioning: DVC
