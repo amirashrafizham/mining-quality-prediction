@@ -1,7 +1,9 @@
 # Mining-quality-prediction
 
 ## About
-The target is to predict the % of Silica in the end of the process, which is the concentrate of iron ore and its impurity (which is the % of Silica).
+Predictive Analytics: The aim is to predict the % of Silica in the end of the process, which is the impure concentrate of iron ore in a flotation plant. 
+
+Prescriptive Analytics: The aim is to use the model to suggest the best parameters to obtain the  optimized parameters of the flotation plant to minimize the % of Silica in the end of the process.
 
 Data Reference: [Kaggle](https://www.kaggle.com/edumagalhaes/quality-prediction-in-a-mining-process)
 
@@ -20,8 +22,7 @@ Data Reference: [Kaggle](https://www.kaggle.com/edumagalhaes/quality-prediction-
 - Experiment Tracking: MLflow
 
 
-### DEVOPS/MLOPS
-- CICD: GitHub Actions
-- ML Orchestrator: Kubeflow
+### DEVOPS
+- Automation and Orchestration: GitHub Actions, Kubeflow
 - Model Monitoring: Evidently, Prometheus, Grafana
 - Model Serving: FastAPI, Docker, Kubernetes
