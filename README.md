@@ -3,7 +3,7 @@
 ## About
 Predictive Analytics: The aim is to predict the % of Silica in the end of the process, which is the impure concentrate of iron ore in a flotation plant. 
 
-Prescriptive Analytics: The aim is to use the model to suggest the best parameters to obtain the  optimized parameters of the flotation plant to minimize the % of Silica in the end of the process.
+Prescriptive Analytics: The aim is to use the model to suggest the best operating parameters of the flotation plant to minimize the % of Silica in the end of the process.
 
 Data Reference: [Kaggle](https://www.kaggle.com/edumagalhaes/quality-prediction-in-a-mining-process)
 
