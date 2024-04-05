@@ -23,6 +23,6 @@ Data Reference: [Kaggle](https://www.kaggle.com/edumagalhaes/quality-prediction-
 
 
 ### DEVOPS
-- Automation and Orchestration: GitHub Actions, Kubeflow
+- Automation and Orchestration: GitHub Actions, Kedro
 - Model Monitoring: Evidently, Prometheus, Grafana
 - Model Serving: FastAPI, Docker, Kubernetes
