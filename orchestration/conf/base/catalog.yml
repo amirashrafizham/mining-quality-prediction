@@ -1,3 +1,23 @@
-mining_data:
+df_mining_data:
   type: pandas.CSVDataset
   filepath: data/01_raw/MiningProcess_Flotation_Plant_Database.csv
+
+df_converted_to_datetime:
+  type: pandas.ParquetDataset
+  filepath: data/02_intermediate/df_converted_to_datetime.pq
+
+df_converted_to_float:
+  type: pandas.ParquetDataset
+  filepath: data/02_intermediate/df_converted_to_float.pq
+
+df_cleaned_table:
+  type: pandas.ParquetDataset
+  filepath: data/03_primary/df_cleaned_table.pq
+
+model_no_tuning:
+  type: pickle.PickleDataset
+  filepath: data/06_models/model_no_tuning.pkl
+
+model_with_tuning:
+  type: pickle.PickleDataset
+  filepath: data/06_models/model_with_tuning.pkl

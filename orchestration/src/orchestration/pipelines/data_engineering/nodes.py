@@ -18,5 +18,9 @@ def convert_to_float(df: pd.DataFrame) -> pd.DataFrame:
     # Convert ',' to '.' and convert to float
     for col in df.columns:
         df[col] = df[col].str.replace(",", ".").astype(float)
-    print(df.dtypes)
+    return df
+
+
+def finalize_data_cleanup(df: pd.DataFrame) -> pd.DataFrame:
+    df = df.dropna()
     return df
