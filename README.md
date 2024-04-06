@@ -8,7 +8,7 @@ Prescriptive Analytics: The aim is to minimize the % of Silica by suggesting the
 Data Reference: [Kaggle](https://www.kaggle.com/edumagalhaes/quality-prediction-in-a-mining-process)
 
 ## Tech Stack
-![Tech Stack](images/tech_stack.png)
+![Tech Stack](images/tech_stack_2.png)
 
 ### DATA ENGINEERING
 - Data Profiling: Great Expectations
