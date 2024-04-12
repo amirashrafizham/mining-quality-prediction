@@ -11,12 +11,12 @@ def create_pipeline(**kwargs) -> Pipeline:
                 outputs=["X_train", "X_test", "y_train", "y_test"],
                 name="split_data_node",
             ),
-            node(
-                func=train_evaluate_model,
-                inputs=["X_train", "y_train", "X_test", "y_test"],
-                outputs="model_no_tuning",
-                name="train_evaluate_model_node",
-            ),
+            # node(
+            #    func=train_evaluate_model,
+            #    inputs=["X_train", "y_train", "X_test", "y_test"],
+            #    outputs="model_no_tuning",
+            #    name="train_evaluate_model_node",
+            # ),
             node(
                 func=train_tune_model,
                 inputs=["X_train", "y_train", "X_test", "y_test"],

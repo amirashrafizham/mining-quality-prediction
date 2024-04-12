@@ -4,6 +4,10 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error
 import lightgbm as lgb
 import optuna
+import mlflow
+from mlflow.models.signature import infer_signature
+import logging
+import shap
 
 
 def split_data(
@@ -26,11 +30,45 @@ def train_evaluate_model(
     X_test: pd.DataFrame,
     y_test: pd.DataFrame,
 ) -> lgb.LGBMRegressor:
+
+    # Define parameters for lightgbm
+    params = {
+        "learning_rate": 0.04789370740272594,
+        "num_leaves": 650,
+        "subsample": 0.5828415933146901,
+        "colsample_bytree": 0.8910869618475113,
+        "min_data_in_leaf": 72,
+    }
+
     # Train model
-    model = lgb.LGBMRegressor()
+    model = lgb.LGBMRegressor(**params)
     model.fit(X_train, y_train)
     y_pred = model.predict(X_test)
+
+    # Evaluate model
     rmse = mean_squared_error(y_test, y_pred, squared=False)
+
+    # Set a tag that we can use to remind ourselves what this run was for
+    mlflow.set_tag("Training Info", "Training without Optuna")
+
+    # Log the accuracy
+    mlflow.log_metric("rmse", rmse)
+
+    # Log the hyperparameters
+    mlflow.log_params(params)
+
+    # Infer the model signature
+    signature = infer_signature(X_train, model.predict(X_train))
+
+    # Log the model
+    model_info = mlflow.lightgbm.log_model(
+        lgb_model=model,
+        artifact_path="mining-quality-model",
+        signature=signature,
+        input_example=X_train,
+        registered_model_name="silica_model",
+    )
+
     print("---------------------------")
     print(f"RMSE: {rmse}")
     print("---------------------------")
@@ -80,6 +118,28 @@ def train_tune_model(
     model.fit(X_train, y_train)
     y_pred = model.predict(X_test)
     rmse = mean_squared_error(y_test, y_pred, squared=False)
+
+    # Set a tag that we can use to remind ourselves what this run was for
+    mlflow.set_tag("Training Info", "Training with Optuna")
+
+    # Log the accuracy
+    mlflow.log_metric("rmse", rmse)
+
+    # Log the hyperparameters
+    mlflow.log_params(best_params)
+
+    # Infer the model signature
+    signature = infer_signature(X_train, model.predict(X_train))
+
+    # Log the model
+    model_info = mlflow.lightgbm.log_model(
+        lgb_model=model,
+        artifact_path="mining-quality-model",
+        signature=signature,
+        input_example=X_train,
+        registered_model_name="silica_model",
+    )
+
     print("---------------------------")
     print("RMSE with Tuning:", rmse)
     print("---------------------------")
@@ -94,4 +154,16 @@ def explain_model(
     X_test: pd.DataFrame,
     y_test: pd.DataFrame,
 ):
+    shap.initjs()
+    explainer = shap.TreeExplainer(model)
+    shap_values = explainer.shap_values(X_train)
+
+    # Store the SHAP values in a HTML file
+    shap.save_html(
+        "shap_values.html",
+    )
+
+    # Log the SHAP values as an artifact
+    mlflow.log_artifact("shap_values.html")
+
     pass
